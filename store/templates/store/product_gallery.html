@@ -1,18 +1,25 @@
 {% extends 'core/base.html' %}
-{% block title %}Galería — ElectroStore{% endblock %}
+{% block title %}{{ category_name }} — ElectroStore{% endblock %}
 {% block banner %}
-  <h1 class="display-6 mb-0">Catálogo de Productos</h1>
+  <h1 class="display-6 mb-0">Explora nuestros {{ category_name }}</h1>
 {% endblock %}
 {% block content %}
+
+<h2 class="text-center my-4">{{ category_name }}</h2>
 
 <div class="row g-4">
   {% for product in products %}
   <div class="col-sm-6 col-lg-3">
     <div class="card h-100">
-      <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain; padding: 10px;">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain; padding: 10px;">
+      {% else %}
+        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+          <span class="text-muted">Sin imagen</span>
+        </div>
+      {% endif %}
       <div class="card-body text-center">
         <h6 class="card-title">{{ product.name }}</h6>
-        <p class="text-muted small">{{ product.get_category_display }}</p>
         <p class="card-text"><strong>${{ product.price|floatformat:0 }}</strong></p>
         <a href="{% url 'store:product_detail' product.pk %}" class="btn btn-sm btn-primary">Ver detalle</a>
       </div>
@@ -21,43 +28,53 @@
   {% empty %}
   <div class="col-12">
     <div class="alert alert-info text-center">
-      <p class="mb-0">No hay productos disponibles. Agrega productos desde el <a href="/admin/">panel de administración</a>.</p>
+      <p class="mb-0">No hay productos en esta categoría. Agrega productos desde el <a href="/admin/">panel de administración</a>.</p>
     </div>
   </div>
   {% endfor %}
 </div>
 
-<!-- Paginación -->
-{% if products.paginator.num_pages > 1 %}
-<div class="d-flex justify-content-center mt-5">
-  <nav aria-label="Paginación de productos">
-    <ul class="pagination">
-      {% if products.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page=1">Primera</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="?page={{ products.previous_page_number }}">Anterior</a>
-        </li>
-      {% endif %}
+<!-- Navegación entre categorías -->
+<div class="d-flex justify-content-center align-items-center mt-5 gap-3">
+  {% if page_number > 1 %}
+    <a class="btn btn-outline-primary" href="?page={{ page_number|add:'-1' }}">
+      <i class="fas fa-arrow-left me-2"></i>Anterior
+    </a>
+  {% else %}
+    <button class="btn btn-outline-secondary" disabled>
+      <i class="fas fa-arrow-left me-2"></i>Anterior
+    </button>
+  {% endif %}
 
-      <li class="page-item active">
-        <span class="page-link">
-          Página {{ products.number }} de {{ products.paginator.num_pages }}
-        </span>
-      </li>
+  <span class="badge bg-primary fs-6 px-3 py-2">
+    Categoría {{ page_number }} de {{ total_pages }}
+  </span>
 
-      {% if products.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ products.next_page_number }}">Siguiente</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="?page={{ products.paginator.num_pages }}">Última</a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
+  {% if page_number < total_pages %}
+    <a class="btn btn-outline-primary" href="?page={{ page_number|add:'1' }}">
+      Siguiente<i class="fas fa-arrow-right ms-2"></i>
+    </a>
+  {% else %}
+    <button class="btn btn-outline-secondary" disabled>
+      Siguiente<i class="fas fa-arrow-right ms-2"></i>
+    </button>
+  {% endif %}
 </div>
-{% endif %}
+
+<!-- Indicadores de categorías -->
+<div class="d-flex justify-content-center mt-3 gap-2">
+  <a href="?page=1" class="btn btn-sm {% if page_number == 1 %}btn-primary{% else %}btn-outline-primary{% endif %}">
+    CPU
+  </a>
+  <a href="?page=2" class="btn btn-sm {% if page_number == 2 %}btn-primary{% else %}btn-outline-primary{% endif %}">
+    RAM
+  </a>
+  <a href="?page=3" class="btn btn-sm {% if page_number == 3 %}btn-primary{% else %}btn-outline-primary{% endif %}">
+    GPU
+  </a>
+  <a href="?page=4" class="btn btn-sm {% if page_number == 4 %}btn-primary{% else %}btn-outline-primary{% endif %}">
+    SSD
+  </a>
+</div>
 
 {% endblock %}
