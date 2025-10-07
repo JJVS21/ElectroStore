@@ -1,39 +1,63 @@
 {% extends 'core/base.html' %}
 {% block title %}Galería — ElectroStore{% endblock %}
 {% block banner %}
-  <h1 class="display-6 mb-0">Explora nuestros {{ category_name }}</h1>
+  <h1 class="display-6 mb-0">Catálogo de Productos</h1>
 {% endblock %}
 {% block content %}
-
-<h1 class="text-center my-4">{{ category_name }}</h1>
 
 <div class="row g-4">
   {% for product in products %}
   <div class="col-sm-6 col-lg-3">
     <div class="card h-100">
-      <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+      <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain; padding: 10px;">
       <div class="card-body text-center">
         <h6 class="card-title">{{ product.name }}</h6>
-        <p class="card-text"><strong>${{ product.price }}</strong></p>
+        <p class="text-muted small">{{ product.get_category_display }}</p>
+        <p class="card-text"><strong>${{ product.price|floatformat:0 }}</strong></p>
+        <a href="{% url 'store:product_detail' product.pk %}" class="btn btn-sm btn-primary">Ver detalle</a>
       </div>
     </div>
   </div>
   {% empty %}
-  <p class="text-center">No hay productos en esta categoría.</p>
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <p class="mb-0">No hay productos disponibles. Agrega productos desde el <a href="/admin/">panel de administración</a>.</p>
+    </div>
+  </div>
   {% endfor %}
 </div>
 
-<!-- Paginación entre categorías -->
-<div class="pagination text-center mt-4">
-  {% if page_number > 1 %}
-    <a class="btn btn-outline-primary mx-1" href="?page={{ page_number|add:'-1' }}">Anterior</a>
-  {% endif %}
+<!-- Paginación -->
+{% if products.paginator.num_pages > 1 %}
+<div class="d-flex justify-content-center mt-5">
+  <nav aria-label="Paginación de productos">
+    <ul class="pagination">
+      {% if products.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page=1">Primera</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ products.previous_page_number }}">Anterior</a>
+        </li>
+      {% endif %}
 
-  <span class="mx-2">Categoría {{ page_number }} de {{ total_pages }}</span>
+      <li class="page-item active">
+        <span class="page-link">
+          Página {{ products.number }} de {{ products.paginator.num_pages }}
+        </span>
+      </li>
 
-  {% if page_number < total_pages %}
-    <a class="btn btn-outline-primary mx-1" href="?page={{ page_number|add:'1' }}">Siguiente</a>
-  {% endif %}
+      {% if products.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ products.next_page_number }}">Siguiente</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ products.paginator.num_pages }}">Última</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>
+{% endif %}
 
 {% endblock %}

@@ -1,13 +1,10 @@
 from django.shortcuts import render
 
-def home(request):  # Vista backend
+def home(request):
     return render(request, "core/home.html")
 
-def Qsomos(request):  # Vista backend
+def Qsomos(request):
     return render(request, "core/quienes_somos.html")
 
-def faq(request):  # Vista backend
+def faq(request):
     return render(request, "core/faq.html")
-
-#def galeria(request):  # Vista backend
-    return render(request, "core/galeria.html")
