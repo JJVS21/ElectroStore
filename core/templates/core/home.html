@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% block title %}Home — ElectroStore{% endblock %}
+{% block banner %}
+  <h1 class="display-6 mb-0">Arma tu PC soñado hoy</h1>
+{% endblock %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <img src="https://t7m8e9c8.delivery.rocketcdn.me/wp-content/uploads/2020/07/especificaciones-procesadores-intel-alder-lake.jpg" class="card-img-top" alt="Procesadores">
+      <div class="card-body">
+        <h5 class="card-title">Procesadores</h5>
+        <p class="card-text">Intel y AMD para todos los presupuestos.</p>
+        <a class="btn btn-primary" href="/galeria/#cpu">Ver más</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <img src="https://hiraoka.com.pe/media/mageplaza/blog/post/m/e/memoria_ram-que_es_y_para_que_sirve_1.jpg" class="card-img-top" alt="Memorias RAM">
+      <div class="card-body">
+        <h5 class="card-title">Memorias RAM</h5>
+        <p class="card-text">DDR4 y DDR5 de alto rendimiento.</p>
+        <a class="btn btn-primary" href="/galeria/#ram">Ver más</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <img src="https://hiraoka.com.pe/media/mageplaza/blog/post/t/a/tarjeta-grafica-que-es-para-que-sirve-como-funciona.jpg" class="card-img-top" alt="Tarjetas gráficas">
+      <div class="card-body">
+        <h5 class="card-title">Tarjetas Gráficas</h5>
+        <p class="card-text">NVIDIA y AMD listas para jugar.</p>
+        <a class="btn btn-primary" href="/galeria/#gpu">Ver más</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

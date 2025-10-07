@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>Productos</h1>
+<div class="product-list">
+    {% for product in products %}
+        <div class="product-item">
+            <h3><a href="{% url 'store:product_detail' product.pk %}">{{ product.name }}</a></h3>
+            <p>{{ product.description|truncatechars:100 }}</p>
+            <p>Precio: ${{ product.price }}</p>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width:200px;"/>
+            {% endif %}
+        </div>
+    {% empty %}
+        <p>No hay productos.</p>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    {% if products.has_previous %}
+        <a href="?page={{ products.previous_page_number }}">« anterior</a>
+    {% endif %}
+    <span>Página {{ products.number }} de {{ products.paginator.num_pages }}</span>
+    {% if products.has_next %}
+        <a href="?page={{ products.next_page_number }}">siguiente »</a>
+    {% endif %}
+</div>
+{% endblock %}

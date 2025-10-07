@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{% block title %}ElectroStore — Hardware al mejor precio{% endblock %}</title>
+
+  <!-- Bootstrap CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Google Fonts: Roboto + Lora (two fonts) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Lora:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons via CDN for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-u5bYQmF4hX7B0nIb4W9j5cQ2C6v0T+O5zX+qXk1z0eG1lP1fZkQ6m4nT2Xk8rKq6Vq7nZL+Xr0cQyM3i1Vv0ug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root{ --brand:#0d6efd; --dark:#0b132b; --muted:#e9ecef; }
+    body{ font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Arial, sans-serif; }
+    h1,h2,h3{ font-family:'Lora', Georgia, serif; }
+    .navbar-brand span{ font-weight:700; }
+    .banner{
+      background: url('https://plus.unsplash.com/premium_photo-1683120889995-b6a309252981?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGVsZWN0ciVDMyVCM25pY2F8ZW58MHx8MHx8fDA%3D') center/cover no-repeat;
+      min-height: 220px; display:flex; align-items:center; justify-content:center;
+      color:#fff; text-shadow:0 2px 12px rgba(0,0,0,.45);
+    }
+    .banner .inner{ background: rgba(0,0,0,.45); padding: 1.25rem 1.5rem; border-radius: 0.75rem; }
+    footer{ background:#111827; color:#cbd5e1; }
+    .social a{ color:#cbd5e1; margin-right:.75rem; font-size:1.25rem; }
+    .social a:hover{ color:#fff; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/"><i class="fa-solid fa-microchip me-2"></i><span>ElectroStore</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample" aria-controls="navbarsExample" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/quienes-somos/">Quiénes Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="/faq/">Preguntas Frecuentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="/galeria/">Galería</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner (overridable) -->
+  <section class="banner">
+    <div class="inner text-center">
+      {% block banner %}
+      <h1 class="display-6 mb-0">Tu tienda de hardware: procesadores, memorias, GPUs y más</h1>
+      {% endblock %}
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main class="py-5">
+    <div class="container">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <!-- Social + Footer (fixed on every page) -->
+  <section class="py-4 bg-light">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div><strong>Síguenos</strong></div>
+    <div class="social d-flex gap-3">
+
+    <a href="https://www.instagram.com/" target="_blank">
+  <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" width="30" height="30" alt="Instagram">
+</a>
+
+    <a href="https://www.facebook.com/" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" width="30" height="30" alt="Facebook">
+    </a>
+
+    <a href="https://x.com/" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/x.svg" width="30" height="30" alt="X">
+    </a>
+
+    <a href="https://www.youtube.com/" target="_blank">
+      <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" width="30" height="30" alt="YouTube">
+    </a>
+
+
+    </div>
+  </div>
+</section>
+
+
+<footer class="py-4">
+  <div class="container d-flex flex-column flex-md-row justify-content-between">
+    <div>© {{ now|default:"2025" }} ElectroStore. Todos los derechos reservados.</div>
+    <div>Contacto: <a class="link-info" href="mailto:contacto@electrostore.cl">contacto@electrostore.cl</a></div>
+  </div>
+</footer>
+
+
+  <!-- Bootstrap Bundle via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

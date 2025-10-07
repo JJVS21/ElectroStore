@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% block title %}Preguntas Frecuentes — ElectroStore{% endblock %}
+{% block banner %}
+  <h1 class="display-6 mb-0">¿Dudas? Aquí están las respuestas</h1>
+{% endblock %}
+{% block content %}
+<div class="accordion" id="faqAcc">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q1h">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1" aria-expanded="true" aria-controls="q1">
+        ¿Hacen envíos a regiones?
+      </button>
+    </h2>
+    <div id="q1" class="accordion-collapse collapse show" aria-labelledby="q1h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Sí, enviamos a todo Chile con cobertura de couriers nacionales. Recibirás número de seguimiento.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q2h">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2" aria-controls="q2">
+        ¿Entregan boleta o factura?
+      </button>
+    </h2>
+    <div id="q2" class="accordion-collapse collapse" aria-labelledby="q2h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Emitimos boleta electrónica y factura según corresponda.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q3h">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q3" aria-controls="q3">
+        ¿Cómo funciona la garantía?
+      </button>
+    </h2>
+    <div id="q3" class="accordion-collapse collapse" aria-labelledby="q3h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Todos los productos cuentan con garantía del fabricante. Te orientamos en el proceso de RMA.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q4h">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q4" aria-controls="q4">
+        ¿Cuáles son los métodos de pago disponibles?
+      </button>
+    </h2>
+    <div id="q4" class="accordion-collapse collapse" aria-labelledby="q4h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Aceptamos tarjetas de crédito, débito, transferencia bancaria y pagos por Webpay.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q5h">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q5" aria-controls="q5">
+        ¿Puedo retirar mi compra en tienda física?
+      </button>
+    </h2>
+    <div id="q5" class="accordion-collapse collapse" aria-labelledby="q5h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Sí, puedes seleccionar retiro en tienda al momento de comprar. Te avisaremos cuando tu pedido esté listo.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q6h">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q6" aria-controls="q6">
+        ¿Qué hago si mi producto llega dañado?
+      </button>
+    </h2>
+    <div id="q6" class="accordion-collapse collapse" aria-labelledby="q6h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Contáctanos inmediatamente para gestionar el cambio o devolución según la garantía y políticas de la tienda.</div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="q7h">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q7" aria-controls="q7">
+        ¿Puedo modificar o cancelar mi pedido?
+      </button>
+    </h2>
+    <div id="q7" class="accordion-collapse collapse" aria-labelledby="q7h" data-bs-parent="#faqAcc">
+      <div class="accordion-body">Puedes modificar o cancelar tu pedido antes de que sea despachado. Escríbenos lo antes posible para ayudarte.</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
