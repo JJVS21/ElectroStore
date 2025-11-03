@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,14 +24,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9o0gmgda3(xkpnw!$tpcg=ezn^ibvv+^$01i6j_&&hiux5=wr&'  # Clave secreta del backend
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True  # ✅ Cambiado a True para desarrollo
 ALLOWED_HOSTS = ['*']  # solo si estás en entorno local
 
 
 # Application definition
 
 INSTALLED_APPS = [  # Apps instaladas en el backend
-    'django.contrib.admin',
+    'admin_interface',
+    'colorfield',
+    'django.contrib.admin',  # ✅ Solo UNA vez (eliminado duplicado)
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -41,8 +44,8 @@ INSTALLED_APPS = [  # Apps instaladas en el backend
     'crispy_forms',
     'crispy_bootstrap5',
     'contact',
-    
 ]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -68,9 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                #  Agrega esta línea para tu procesador personalizado:
-                'core.processors.info_general',
+                'core.processors.info_general',  # Procesador personalizado
             ],
         },
     },
@@ -126,6 +127,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✅ Agregado para collectstatic
+
+# Static files dirs
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -136,7 +141,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media (user-uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-# Static files dirs
-import os
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
