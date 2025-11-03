@@ -12,15 +12,15 @@
   <div class="col-sm-6 col-lg-3">
     <div class="card h-100">
       {% if product.image %}
-        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: contain; padding: 10px;">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.nombre }}" style="height: 200px; object-fit: contain; padding: 10px;">
       {% else %}
         <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
           <span class="text-muted">Sin imagen</span>
         </div>
       {% endif %}
       <div class="card-body text-center">
-        <h6 class="card-title">{{ product.name }}</h6>
-        <p class="card-text"><strong>${{ product.price|floatformat:0 }}</strong></p>
+        <h6 class="card-title">{{ product.nombre }}</h6>
+        <p class="card-text"><strong>${{ product.precio|floatformat:0 }}</strong></p>
         <a href="{% url 'store:product_detail' product.pk %}" class="btn btn-sm btn-primary">Ver detalle</a>
       </div>
     </div>
