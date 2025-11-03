@@ -23,9 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9o0gmgda3(xkpnw!$tpcg=ezn^ibvv+^$01i6j_&&hiux5=wr&'  # Clave secreta del backend
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Modo debug del servidor
-
-ALLOWED_HOSTS = []  # Hosts permitidos
+DEBUG = False
+ALLOWED_HOSTS = ['*']  # solo si estás en entorno local
 
 
 # Application definition
@@ -39,7 +38,9 @@ INSTALLED_APPS = [  # Apps instaladas en el backend
     'django.contrib.staticfiles',
     'core',
     'store',
+    'crispy_forms',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [  # Middleware backend
     'django.middleware.security.SecurityMiddleware',
@@ -63,10 +64,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                #  Agrega esta línea para tu procesador personalizado:
+                'core.processors.info_general',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'Electrostore.wsgi.application'
 

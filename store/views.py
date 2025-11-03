@@ -47,3 +47,29 @@ def product_detail(request, pk):
         'product': product,
     }
     return render(request, 'store/product_detail.html', context)
+
+def filtrar_productos(request):
+    """
+    Filtra productos según parámetros recibidos por la URL.
+    Ejemplo: /store/filtrar/?categoria=cpu&precio_max=50000
+    """
+    categoria = request.GET.get('categoria')
+    precio_max = request.GET.get('precio_max')
+
+    productos = Product.objects.all()
+
+    if categoria:
+        productos = productos.filter(category__icontains=categoria)
+    if precio_max:
+        try:
+            precio_max = float(precio_max)
+            productos = productos.filter(price__lte=precio_max)
+        except ValueError:
+            pass  # si no es número, no aplica el filtro
+
+    context = {
+        'productos': productos,
+        'categoria': categoria,
+        'precio_max': precio_max,
+    }
+    return render(request, 'store/filtrar_productos.html', context)

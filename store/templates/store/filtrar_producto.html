@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Resultados del filtro</h2>
+
+{% if productos %}
+  <ul>
+    {% for producto in productos %}
+      <li>{{ producto.name }} - {{ producto.price }} CLP ({{ producto.category }})</li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No se encontraron productos con esos criterios.</p>
+{% endif %}
+{% endblock %}
