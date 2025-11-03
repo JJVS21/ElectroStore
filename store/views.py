@@ -1,12 +1,9 @@
+# store/views.py (reemplazar o añadir esta vista corregida)
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import Producto  # usar el nombre correcto del modelo
 
 def product_gallery(request):
-    """
-    Muestra los productos agrupados por categoría, una categoría por página.
-    """
     page_number = request.GET.get('page', '1')
-
     categories = ['cpu', 'ram', 'gpu', 'ssd']
     category_names = {
         'cpu': 'Procesadores',
@@ -15,7 +12,6 @@ def product_gallery(request):
         'ssd': 'Almacenamiento SSD'
     }
 
-    # Controlar si la página existe
     try:
         page_number = int(page_number)
         if page_number < 1 or page_number > len(categories):
@@ -25,12 +21,13 @@ def product_gallery(request):
         page_number = 1
         category_key = categories[0]
 
-    # Filtrar productos por categoría
-    products = Product.objects.filter(category=category_key).order_by('-created')
+    # FILTRAR por campo 'categoria' (suponiendo que en Producto guardas la clave 'categoria' como texto)
+    # Si en tu modelo Producto.categoria es FK, filtra por la relación:
+    productos = Producto.objects.filter(categoria__nombre__iexact=category_key).order_by('-id')
 
     context = {
-        'products': products,
-        'category_name': category_names[category_key],
+        'products': productos,
+        'category_name': category_names.get(category_key, category_key),
         'category_key': category_key,
         'page_number': page_number,
         'total_pages': len(categories),
@@ -39,33 +36,30 @@ def product_gallery(request):
 
 
 def product_detail(request, pk):
-    """
-    Muestra el detalle de un producto específico.
-    """
-    product = get_object_or_404(Product, pk=pk)
-    context = {
-        'product': product,
-    }
-    return render(request, 'store/product_detail.html', context)
+    producto = get_object_or_404(Producto, pk=pk)
+    return render(request, 'store/product_detail.html', {'product': producto})
+
 
 def filtrar_productos(request):
     """
-    Filtra productos según parámetros recibidos por la URL.
-    Ejemplo: /store/filtrar/?categoria=cpu&precio_max=50000
+    Vista que aplica al menos dos filtros: categoria y precio_max
+    Ejemplo: /store/filtrar/?categoria=Procesadores&precio_max=500000
     """
     categoria = request.GET.get('categoria')
     precio_max = request.GET.get('precio_max')
 
-    productos = Product.objects.all()
+    productos = Producto.objects.all()
 
     if categoria:
-        productos = productos.filter(category__icontains=categoria)
+        # si categoria es el nombre de la Categoria:
+        productos = productos.filter(categoria__nombre__icontains=categoria)
+
     if precio_max:
         try:
-            precio_max = float(precio_max)
-            productos = productos.filter(price__lte=precio_max)
+            precio_max_val = float(precio_max)
+            productos = productos.filter(precio__lte=precio_max_val)
         except ValueError:
-            pass  # si no es número, no aplica el filtro
+            pass
 
     context = {
         'productos': productos,

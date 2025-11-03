@@ -6,21 +6,21 @@ from core import views
 from django.conf.urls import handler404  # ← agregado
 from django.shortcuts import render       # ← agregado
 
+# Electrostore/urls.py (fragmento)
 urlpatterns = [
     path('contacto/', include('contact.urls')),
     path('admin/', admin.site.urls),
-    path('', views.home, name="home"),
-    path('quienes-somos/', views.Qsomos, name="quienes_somos"),
-    path('faq/', views.faq, name="faq"),
-    path('', include('store.urls')),  # Incluye todas las rutas de store
+    path('', include('core.urls')),       # ahora core gestiona la raíz
+    path('store/', include('store.urls')), # store bajo /store/
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
-# 🚫 Manejo personalizado del error 404
+# Electrostore/urls.py (reemplaza la función existente)
 def error_404_view(request, exception):
-    return render(request, '404.html', status=404)
+    return render(request, 'core/404.html', status=404)
 
-handler404 = error_404_view
+
