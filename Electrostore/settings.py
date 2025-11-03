@@ -39,8 +39,12 @@ INSTALLED_APPS = [  # Apps instaladas en el backend
     'core',
     'store',
     'crispy_forms',
+    'crispy_bootstrap5',
+    'contact',
+    
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 MIDDLEWARE = [  # Middleware backend
     'django.middleware.security.SecurityMiddleware',

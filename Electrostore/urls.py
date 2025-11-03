@@ -7,7 +7,7 @@ from django.conf.urls import handler404  # ← agregado
 from django.shortcuts import render       # ← agregado
 
 urlpatterns = [
-    path('contact/', include('contact.urls')),
+    path('contacto/', include('contact.urls')),
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
     path('quienes-somos/', views.Qsomos, name="quienes_somos"),
