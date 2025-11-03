@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9o0gmgda3(xkpnw!$tpcg=ezn^ibvv+^$01i6j_&&hiux5=wr&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # ✅ Cambiado a True para desarrollo
-ALLOWED_HOSTS = ['*']  # solo si estás en entorno local
+ALLOWED_HOSTS =['127.0.0.1', 'localhost'] # solo si estás en entorno local
 
 
 # Application definition
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['*']  # solo si estás en entorno local
 INSTALLED_APPS = [  # Apps instaladas en el backend
     'admin_interface',
     'colorfield',
-    'django.contrib.admin',  # ✅ Solo UNA vez (eliminado duplicado)
+    'django.contrib.admin',  
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -114,9 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'  # Idioma backend
+LANGUAGE_CODE = 'es-es'  # Idioma backend
 
-TIME_ZONE = 'UTC'  # Zona horaria
+TIME_ZONE = 'America/Santiago'  # Zona horaria
 
 USE_I18N = True
 
@@ -127,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # ✅ Agregado para collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles'  #  Agregado para collectstatic
 
 # Static files dirs
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
