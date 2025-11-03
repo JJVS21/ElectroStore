@@ -1,6 +1,6 @@
-# store/views.py (reemplazar o añadir esta vista corregida)
+# store/views.py
 from django.shortcuts import render, get_object_or_404
-from .models import Producto  # usar el nombre correcto del modelo
+from .models import Producto
 
 def product_gallery(request):
     page_number = request.GET.get('page', '1')
@@ -21,13 +21,13 @@ def product_gallery(request):
         page_number = 1
         category_key = categories[0]
 
-    # FILTRAR por campo 'categoria' (suponiendo que en Producto guardas la clave 'categoria' como texto)
-    # Si en tu modelo Producto.categoria es FK, filtra por la relación:
-    productos = Producto.objects.filter(categoria__nombre__iexact=category_key).order_by('-id')
+    # CORRECCIÓN: Usar el nombre completo de la categoría del diccionario
+    full_category_name = category_names.get(category_key, category_key)
+    productos = Producto.objects.filter(categoria__nombre=full_category_name).order_by('-id')
 
     context = {
         'products': productos,
-        'category_name': category_names.get(category_key, category_key),
+        'category_name': full_category_name,
         'category_key': category_key,
         'page_number': page_number,
         'total_pages': len(categories),
@@ -51,7 +51,6 @@ def filtrar_productos(request):
     productos = Producto.objects.all()
 
     if categoria:
-        # si categoria es el nombre de la Categoria:
         productos = productos.filter(categoria__nombre__icontains=categoria)
 
     if precio_max:
@@ -66,4 +65,4 @@ def filtrar_productos(request):
         'categoria': categoria,
         'precio_max': precio_max,
     }
-    return render(request, 'store/filtrar_productos.html', context)
+    return render(request, 'store/filtrar_producto.html', context)
