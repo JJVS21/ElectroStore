@@ -8,3 +8,4 @@ def Qsomos(request):
 
 def faq(request):
     return render(request, "core/faq.html")
+
