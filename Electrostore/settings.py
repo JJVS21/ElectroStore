@@ -59,26 +59,26 @@ MIDDLEWARE = [  # Middleware backend
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Electrostore.urls'  # Configuración urls
+ROOT_URLCONF = 'ElectroStore.urls'  # Configuración urls
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # agrega esta línea
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.processors.info_general',  # Procesador personalizado
             ],
         },
     },
 ]
 
 
-WSGI_APPLICATION = 'Electrostore.wsgi.application'
+WSGI_APPLICATION = 'ElectroStore.wsgi.application'
 
 
 # Database
