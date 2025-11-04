@@ -59,7 +59,7 @@ MIDDLEWARE = [  # Middleware backend
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'ElectroStore.urls'  # Configuración urls
+ROOT_URLCONF = 'Electrostore.urls'  # Configuración urls
 
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'ElectroStore.wsgi.application'
+WSGI_APPLICATION = 'Electrostore.wsgi.application'
 
 
 # Database
