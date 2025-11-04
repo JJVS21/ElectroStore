@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9o0gmgda3(xkpnw!$tpcg=ezn^ibvv+^$01i6j_&&hiux5=wr&'  # Clave secreta del backend
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # ✅ Cambiado a True para desarrollo
+DEBUG = True  #  Cambiado a True para desarrollo
 ALLOWED_HOSTS =['127.0.0.1', 'localhost'] # solo si estás en entorno local
 
 
