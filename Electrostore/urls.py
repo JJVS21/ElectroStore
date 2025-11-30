@@ -10,6 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),        # core maneja la página principal
     path('store/', include('store.urls')), # rutas de la tienda
+    path('accounts/', include('accounts.urls', namespace='accounts')),
+
 ]
 
 if settings.DEBUG:

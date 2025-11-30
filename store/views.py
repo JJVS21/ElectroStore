@@ -1,6 +1,7 @@
 # store/views.py
 from django.shortcuts import render, get_object_or_404
 from .models import Producto
+from django.core.mail import send_mail
 
 def product_gallery(request):
     page_number = request.GET.get('page', '1')
@@ -66,3 +67,13 @@ def filtrar_productos(request):
         'precio_max': precio_max,
     }
     return render(request, 'store/filtrar_producto.html', context)
+
+
+def enviar_correo_prueba(request):
+    send_mail(
+        subject='Probando Mailtrap',
+        message='Este es un correo de prueba desde el proyecto.',
+        from_email='noreply@proyecto.com',
+        recipient_list=['test@example.com'],
+    )
+    return HttpResponse("Correo enviado (revisar Mailtrap)")

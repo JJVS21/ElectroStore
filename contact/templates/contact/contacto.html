@@ -5,16 +5,17 @@
 <div class="container mt-5">
     <h2 class="mb-4">Formulario de Contacto</h2>
 
+    <!-- Mostrar mensaje de éxito -->
     {% if enviado %}
         <div class="alert alert-success">
-            ¡Gracias por tu mensaje! Pronto te contactaremos.
+            Tu mensaje ha sido enviado correctamente. ¡Gracias por contactarnos!
         </div>
-    {% else %}
-        <form method="POST" novalidate>
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" class="btn btn-primary mt-3">Enviar</button>
-        </form>
     {% endif %}
+
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+    </form>
 </div>
 {% endblock %}
