@@ -1,25 +1,30 @@
 import requests
 from django.shortcuts import render, redirect
-from store.models import Categoria   # ← IMPORTANTE
+from store.models import Categoria
+
 
 def productos_api_view(request):
     url = "http://127.0.0.1:8000/api/productos/"
     respuesta = requests.get(url)
-    productos = respuesta.json()
 
+    print("STATUS:", respuesta.status_code)
+    print("RESPUESTA RAW:", respuesta.text)
+
+    productos = respuesta.json()   # ← aquí está explotando
     return render(request, "frontendapi/lista_productos.html", {"productos": productos})
+
 
 
 def crear_producto_view(request):
 
-    categorias = Categoria.objects.all()   # ← ENVIAR CATEGORÍAS
+    categorias = Categoria.objects.all()
 
     if request.method == "POST":
         nombre = request.POST.get("nombre")
         descripcion = request.POST.get("descripcion")
         precio = request.POST.get("precio")
         stock = request.POST.get("stock")
-        categoria = request.POST.get("categoria")   # ← IMPORTANTE
+        categoria = request.POST.get("categoria")
 
         data = {
             "nombre": nombre,
