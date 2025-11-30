@@ -36,6 +36,7 @@ INSTALLED_APPS = [  # Apps instaladas en el backend
     'crispy_bootstrap5',
     'contact',
     'accounts',
+    'api',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

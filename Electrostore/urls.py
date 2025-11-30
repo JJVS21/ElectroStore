@@ -11,6 +11,8 @@ urlpatterns = [
     path('', include('core.urls')),        # core maneja la página principal
     path('store/', include('store.urls')), # rutas de la tienda
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path("api/", include("api.urls")),
+    path("frontapi/", include("frontendapi.urls")),
 
 ]
 

@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Productos desde la API</h2>
+
+    <ul class="list-group mt-3">
+        {% for p in productos %}
+            <li class="list-group-item">
+                <strong>{{ p.nombre }}</strong> — ${{ p.precio }}
+                <br>
+                <small>{{ p.descripcion }}</small><br>
+                Stock: {{ p.stock }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
