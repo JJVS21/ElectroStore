@@ -37,6 +37,7 @@ INSTALLED_APPS = [  # Apps instaladas en el backend
     'contact',
     'accounts',
     'api',
+    'frontendapi',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'

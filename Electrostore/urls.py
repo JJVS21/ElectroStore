@@ -12,7 +12,7 @@ urlpatterns = [
     path('store/', include('store.urls')), # rutas de la tienda
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path("api/", include("api.urls")),
-    path("frontapi/", include("frontendapi.urls")),
+    path("frontendapi/", include("frontendapi.urls")),
 
 ]
 

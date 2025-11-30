@@ -1,30 +1,33 @@
-from django.shortcuts import render
-
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
 import json
 
-from .models import ProductoExtra
+from store.models import Producto, Categoria
 
 
-@method_decorator(csrf_exempt, name='dispatch')
+@csrf_exempt
 def productos_api(request):
-    
-    # GET → devolver todos los productos en JSON
+
+    # GET → Lista todos los productos
     if request.method == "GET":
-        productos = list(ProductoExtra.objects.values())
+        productos = list(Producto.objects.values())
         return JsonResponse(productos, safe=False)
 
-    # POST → crear producto desde JSON
+    # POST → Crear un producto
     if request.method == "POST":
         data = json.loads(request.body)
 
-        nuevo = ProductoExtra.objects.create(
+        # Cambiado: debe ser categoria_id
+        categoria_id = data.get("categoria_id")
+
+        if not Categoria.objects.filter(id=categoria_id).exists():
+            return JsonResponse({"error": "Categoría no existe"}, status=400)
+
+        nuevo = Producto.objects.create(
             nombre=data.get("nombre"),
-            descripcion=data.get("descripcion"),
             precio=data.get("precio"),
-            stock=data.get("stock")
+            stock=data.get("stock"),
+            categoria_id=categoria_id,
         )
 
         return JsonResponse(
@@ -33,4 +36,3 @@ def productos_api(request):
         )
 
     return JsonResponse({"error": "Método no permitido"}, status=405)
-

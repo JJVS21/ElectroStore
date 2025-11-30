@@ -1,0 +1,9 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h3>Producto creado correctamente 🎉</h3>
+    <a href="{% url 'crear_producto' %}" class="btn btn-success mt-3">Crear otro</a>
+    <a href="{% url 'productos_api_view' %}" class="btn btn-secondary mt-3">Ver lista de productos</a>
+</div>
+{% endblock %}
