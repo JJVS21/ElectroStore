@@ -16,3 +16,13 @@ Proyecto web desarrollado con Django para la gestión de una tienda electrónica
 2. Instalar dependencias:
    ```bash
    pip install -r requirements.txt
+
+
+## Paginas web (API)
+http://127.0.0.1:8000/api/productos/
+http://127.0.0.1:8000/frontendapi/productos/crear/
+
+##Usuarios
+root == root123
+jordan == Venegas123
+seba == Aguayo123
